@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>todos</h1>
+    <form action="" method="POST">
+        <input type="text" placeholder="todo">
+        <input type="text" placeholder="description">
+        <button id="boton">crear todo</button>
+
+        <div id="todos">
+
+
+        </div>
+        <div id="description">
+
+        </div>
+
+    </form>
+</body>
+<script>
+    // Script para realizar una solicitud HTTP al endpoint http://localhost:3000/todos/4
+
+// Utilizamos la función fetch para hacer la solicitud GET al endpoint deseado
+// fetch('http://localhost:3000/todos/4')
+//   .then(response => {
+//     // Verificamos si la solicitud fue exitosa (código de respuesta en el rango 200-299)
+//     if (!response.ok) {
+//       throw new Error('La solicitud no fue exitosa');
+//     }
+//     // Analizamos la respuesta JSON y la retornamos como una promesa
+//     return response.json();
+//   })
+//   .then(data => {
+//     // Aquí puedes utilizar los datos obtenidos de la respuesta
+//     console.log('Datos obtenidos:', data);
+//     let div= document.getElementById('todos')
+//     let div2= document.getElementById('todos')
+//     div.textContent = data[0].name
+
+    
+//   })
+//   .catch(error => {
+//     console.error('Error al hacer la solicitud:', error);
+//   });
+
+  async function enviar(data) {
+    await fetch('http://localhost:3000/todos', {
+    method: 'POST',
+    mode:"cors",
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  }).then(response => {
+    // Verificamos si la solicitud fue exitosa (código de respuesta en el rango 200-299)
+    if (!response.ok) {
+      throw new Error('La solicitud no fue exitosa');
+    }
+    // Analizamos la respuesta JSON y la retornamos como una promesa
+    return response.json();
+  }).then(data => {
+    // Aquí puedes utilizar los datos obtenidos de la respuesta
+    console.log('Datos obtenidos:', data);
+    let div= document.getElementById('todos')
+    let div2= document.getElementById('todos')
+    div.textContent = data[0].name
+  }).catch(error => {
+    console.error('Error al hacer la solicitud:', error);
+  });
+  }
+
+  
+  // window.addEventListener('load', enviar({
+  //   name: 'manu puto',
+  //   description: 'manu putaso',
+  // }))
+    enviar({
+      name: 'manu puto',
+      description: 'manu puto de verda'
+    })
+  
+</script>
+</html>

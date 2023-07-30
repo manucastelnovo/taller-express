@@ -1,4 +1,5 @@
 import  express  from 'express'
+import cors from 'cors'
 
 const app = express();
 
@@ -6,10 +7,14 @@ const port = 3000;
 
 app.use(express.json())
 
+app.use(cors());
+
 import { pool } from './service/database_service.js';
 import { GET_TODOS_QUERIES,POST_TODO_QUERY } from './core/queries.js'
 
 // crear rutas 
+
+
 
 app.get('/todos/:id',(req,res) => {
     const id = req.params.id
@@ -32,6 +37,7 @@ app.delete('/todos/:id',(req,res)=>{
     const id = req.params.id
     res.send('elimine un todo con id ' + id)
 });
+
 
 
 app.listen(port,()=>{
